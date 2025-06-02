@@ -1,0 +1,15 @@
+FROM nginx
+
+LABEL maintainer='Olivier KOUOKAM'
+
+RUN apt update
+
+RUN DEBIAN_FRONTEND=noninteractive apt install git -y
+
+RUN rm -Rf /usr/share/nginx/html/*
+
+RUN git clone https://github.com/OlivierKouokam/m2i-static-website.git /usr/share/nginx/html/
+
+EXPOSE 80
+
+ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]
